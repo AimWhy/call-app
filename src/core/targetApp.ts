@@ -19,15 +19,15 @@ export const enum AppFlags {
 
 export const appSchemePrefix = {
   [AppFlags.ZZ]: 'zhuanzhuan:',
-  [AppFlags.ZZSeller]: 'zhuanzhuanseller:', // 商家版app已下架, 服务停掉后考虑移除该app逻辑
+  [AppFlags.ZZSeller]: 'zhuanzhuanseller:', 
   [AppFlags.ZZHunter]: 'zzhunter:',
   [AppFlags.ZZSeeker]: 'zljgo:',
 }
 
 export const appUniversalPath = {
   [AppFlags.ZZ]: 'zhuanzhuan',
-  [AppFlags.ZZSeller]: 'seller', // 目前不支持
-  [AppFlags.ZZHunter]: 'zzhunter', // 目前不支持
+  [AppFlags.ZZSeller]: 'seller', 
+  [AppFlags.ZZHunter]: 'zzhunter', 
   [AppFlags.ZZSeeker]: 'zhaoliangji',
 }
 
@@ -43,14 +43,14 @@ export const getTargetInfo = (options: CallAppOptions) => {
   }
 
   const { appName } = handlePath2appName(path || '')
-  // 优先取 options.targetApp // 默认 配置为 转转
+  // 优先取 options.targetApp
   targetApp = (targetApp || appName || AppNames[AppFlags.ZZ]) as TargetApp
 
   if (!targetApp) {
     logError(`(targetApp || appName) '${targetApp}' is Invalid， please check! \n`)
     return
   }
-  // 默认是 转转
+
   let name = AppNames[AppFlags.ZZ]
   let flag = AppFlags.ZZ
   let schemePrefix: string
@@ -93,13 +93,12 @@ export const getTargetInfo = (options: CallAppOptions) => {
   return { flag, name, schemePrefix, universalPath, downloadConfig }
 }
 
-//  转转 app
 const isZZ = (targetApp: string): boolean => /^(zhuanzhuan|zz)$/i.test(targetApp)
-//  转转卖家版 app
+
 const isZZSeller = (targetApp: string): boolean => /^zzSeller$/i.test(targetApp)
-//  转转采货侠 app
+
 const isZZHunter = (targetApp: string): boolean => /^zzHunter$/i.test(targetApp)
-//  转转找靓机 app
+
 const isZZSeeker = (targetApp: string): boolean => /^zlj$/i.test(targetApp)
 //
 const isWXMini = (targetApp: string): boolean => /^wxMini$/i.test(targetApp)
