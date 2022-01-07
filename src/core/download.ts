@@ -40,14 +40,12 @@ export const allDownloadUrls = {
     // download-api 下载 / 转转特殊的处理方式 安卓ios 统一下载 会更改下载配置文件
     api: 'https://app.zhuanzhuan.com/zz/redirect/download',
   },
-  // 找靓机
   [AppFlags.ZZSeeker]: {
     ios: 'https://itunes.apple.com/cn/app/id1060362098',
     android: 'market://details?id=com.huodao.hdphone',
     android_api: 'https://dlapk.zhaoliangji.com/zlj_zhaoliangji.apk',
     android_yyb: 'https://sj.qq.com/myapp/detail.htm?apkName=com.huodao.hdphone',
   },
-  // 采货侠
   [AppFlags.ZZHunter]: {
     ios: 'https://itunes.apple.com/cn/app/id1491125379',
     android: 'market://details?id=com.zhuanzhuan.hunter',
@@ -55,7 +53,6 @@ export const allDownloadUrls = {
       'https://app.zhuanzhuan.com/zzopredirect/ypofflinemart/downloadIosOrAndroid?channelId=923   ',
     android_yyb: 'https://sj.qq.com/myapp/detail.htm?apkName=com.zhuanzhuan.hunter',
   },
-  // 卖家版
   [AppFlags.ZZSeller]: {
     ios: '',
     android: '',
@@ -103,19 +100,13 @@ export const generateDownloadUrl = (instance: CallAppInstance): string => {
   // 下载配置
   // (目前 h5 环境 只考虑 zz、zlj、zzHunter)
   if (flag & AppFlags.ZZ) {
-    // 目标app 是转转
-    if (isWechat && is58Host) {
-      // plat 如果 wx + hostname 58.com， downloadConfig[api] + '?channelId=' + channelId
-      downloadUrl = `${downloadConfig?.api}?channelId=${channelId}`
-    } else if ((is58App && isIos) || ((isQQ || isWechat) && isIos)) {
+
+    if ((is58App && isIos) || ((isQQ || isWechat) && isIos)) {
       // plat 如果 58 + ios || wx + ios || qq + ios, 走 苹果商店 , downloadConfig[ios]
       downloadUrl = downloadConfig?.ios || ''
     } else if ((isQQ || isWechat) && isAndroid) {
       // plat 如果 wx + android || qq + android， 走应用宝， downloadConfig[android_yyb]
       downloadUrl = downloadConfig?.android_yyb
-    } else if (is58App && isAndroid) {
-      // plat 如果 58App ，无法传递 channelId ， 应用商店下载 downloadUrl[ios | android]
-      downloadUrl = downloadConfig?.android
     } else {
       //  其他 走 download-api 下载 channelId deeplinkId,
       // channelId 下载来源/渠道， deeplinkId App 后台配置默认打开页
@@ -126,7 +117,6 @@ export const generateDownloadUrl = (instance: CallAppInstance): string => {
       downloadUrl = `${downloadConfig?.api}?channelId=${channelId}${deeplink}`
     }
   } else if (flag & AppFlags.NoZZ) {
-    // 目标app 是找靓机、采货侠、微信小程序
     if (isIos) {
       downloadUrl = downloadConfig?.ios
     } else if (isWechat && isAndroid) {
