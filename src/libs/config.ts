@@ -51,7 +51,7 @@ export const dependencies = {
 }
 
 /**
- * 转转App, native相关信息
+ * App, native相关信息
  * */
 export interface AppInfo {
   SCHEMA: string
@@ -60,13 +60,13 @@ export interface AppInfo {
 }
 
 export const zzAppInfo: AppInfo = {
-  SCHEMA: 'zhuanzhuan://', // 转转App跳转协议(Android & IOS)
+  SCHEMA: 'zhuanzhuan://', // App跳转协议(Android & IOS)
   ANDROID_PACKAGE_NAME: 'com.wuba.zhuanzhuan', // Android客户端包名
   ANDROID_MAINCLS: 'com.wuba.zhuanzhuan.presentation.view.activity.LaunchActivity', // Android客户端启动页主类名
 }
 
 /**
- * 转转微信公众号相关信息
+ * 微信公众号相关信息
  * */
 export interface WXInfo {
   appID: string
@@ -74,6 +74,6 @@ export interface WXInfo {
 }
 
 export const wxInfo: WXInfo = {
-  appID: 'wx6f1a8464fa672b11', // 转转app在微信绑定的appid
-  miniID: 'gh_c2980df66965', // zz小程序id
+  appID: '', // app在微信绑定的appid
+  miniID: '', // 小程序id
 }
