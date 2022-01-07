@@ -1,3 +1,3 @@
 export { openZZInWX } from './wx'
-export { openZZIn58 } from './wuba'
+export { openZZIn5 } from './wuba'
 export * from './zz'
