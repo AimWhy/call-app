@@ -69,14 +69,6 @@ export const openAppInWX = (
       cb()
     }, delay)
   }
-  // 如果是58域名的话
-  if (is58Host) {
-    handleByuLink(() => {
-      callFailed()
-      downloadLink && evokeByLocation(downloadLink)
-    })
-    return
-  }
 
   invokeInWX('launchApplication', { appID, parameter, extInfo }, app)
     .then((res) => {
