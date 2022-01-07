@@ -22,7 +22,7 @@ export const generateScheme = (instance: CallAppInstance): string => {
   const { options, targetInfo } = instance
   let { path, urlSearch } = options
 
-  path = path || (urlSearch ? getSchemeByUrlSearch(urlSearch) : '')
+  path = path || urlSearch
   // new Regexp(zzInnerSchemeReg).test(path)
   // 检验 path 中是否有 scheme-prefix  // 旧版本逻辑迁移
 
