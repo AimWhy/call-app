@@ -3,7 +3,7 @@ import { AppInfo, dependencies } from '../config'
 import { checkOpen } from '../evoke'
 import { loadJSArr, logError, logInfo } from '../utils'
 
-export type App58 = {
+export type App5 = {
   action?: {
     openApp: (...res: any[]) => void
     isInstallApp: (...res: any[]) => void
@@ -13,35 +13,35 @@ export type App58 = {
   }
 }
 
-export const load58SDK = (): Promise<any> =>
+export const load5SDK = (): Promise<any> =>
   new Promise((resolve) => {
     loadJSArr([dependencies.WB_SDK.link], () => {
       resolve(window.WBAPP)
     })
   })
 
-export const sdk58 = {
-  isInstallApp: (app: App58, options = {}) => {
+export const sdk5 = {
+  isInstallApp: (app: App5, options = {}) => {
     return new Promise((resolve, reject) => {
       app?.action?.isInstallApp(options, (_: any) => {
         _ ? resolve({}) : reject({})
       })
     })
   },
-  openApp(app: App58, options = {}) {
+  openApp(app: App5, options = {}) {
     return app?.action?.openApp(options)
   },
-  getVersion(app: App58) {
+  getVersion(app: App5) {
     return app?.common?.appVersion
   },
 }
 /**
- * 58app内打开转转
+ * app内打开
  * @param instance
  * @param appInfo
  */
-export const openZZIn58 = (instance: CallAppInstance, appInfo: AppInfo) => {
-  logInfo('openZZIn58')
+export const openZZIn5 = (instance: CallAppInstance, appInfo: AppInfo) => {
+  logInfo('openZZIn5')
 
   const {
     options: { delay = 2500, callError = () => {}, callSuccess = () => {}, callFailed = () => {} },
@@ -54,7 +54,7 @@ export const openZZIn58 = (instance: CallAppInstance, appInfo: AppInfo) => {
   }
 
   // load sdk
-  load58SDK()
+  load5SDK()
     .then((app) => {
       // hack 检测 open状态
       const handleCheck = () =>
@@ -68,7 +68,7 @@ export const openZZIn58 = (instance: CallAppInstance, appInfo: AppInfo) => {
         )
 
       // sdk
-      sdk58.openApp(app, {
+      sdk5.openApp(app, {
         urlschema: urlScheme || appInfo.SCHEMA,
         package: appInfo.ANDROID_PACKAGE_NAME,
         maincls: appInfo.ANDROID_MAINCLS,
